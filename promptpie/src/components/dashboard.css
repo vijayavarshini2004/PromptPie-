@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding:30px;
-    height:120px;
+    height:100px;
     width:100%;
     background-color: rgb(255, 255, 255);
 }
@@ -26,15 +26,18 @@
 .dash-navbar input{
     height: 40px;
     width: 200px;
-    border-radius: 10px;
+    border-radius:10px 0 0px 10px;
     outline: gray;
     border: 1px solid gray;
     padding-left: 20px;
 }
 
-.dash-navbar img{
-    height: 40px;
-    width: 40px;
+.search-img{
+    height: 44px;
+    width: 44px;
+    background-color: rgb(190, 190, 190);
+    transform: translateX(-10px);
+    border-radius:0px 10px 10px 0px;
 }
 
 .dash-navbar .right{
@@ -119,7 +122,7 @@
     margin-bottom: 25px;
     width:30%;
     background-color: white;
-    box-shadow: 0px 4px 5px 2px rgb(196, 196, 196);
+    /* box-shadow: 0px 4px 5px 2px rgb(196, 196, 196); */
     border-radius: 15px;
     overflow: hidden;
 }
@@ -143,12 +146,20 @@
 
 .dash-buttons div{
     background-color: #5F6EFB;
-    width:200px;
-    height: 70px;
-    border-radius: 20px;
+    box-shadow: inset 3px 8px 8px rgb(48, 108, 237);
+    width:auto;
+    height: 60px;
+    padding:0px 15px 0px 15px;
+    border-radius: 50px;
     display: grid;
     place-content: center;
-    font-size:30px;
+    font-size:26px;
     color:white;
+    transition: 0.35s ease-in-out;
+}
 
+.dash-buttons div:hover{
+    cursor: pointer;
+    box-shadow: inset 1px 48px 48px rgb(71, 48, 225);
+    transition: 0.35s ease-in-out;
 }

@@ -4,7 +4,7 @@ export default function Dashboard(){
     return (
         <div className='dash-body'>
         <div className="dash-navbar">
-            <div className='search'><input type="text" placeholder='Search' /><img src='https://www.thinkafrica.fi/wp-content/uploads/2019/04/search-icon.png'></img></div>
+            <div className='search'><input type="text" placeholder='Search' /><img className='search-img' src='https://www.thinkafrica.fi/wp-content/uploads/2019/04/search-icon.png'></img></div>
             <div className='right'>
                 <span className='profile'>P</span>
                 <span className='settings'><img src='https://icons.veryicon.com/png/o/miscellaneous/acdm-monochromatic/fy_ic_setting.png'/></span>
@@ -12,6 +12,7 @@ export default function Dashboard(){
         </div>
         <div className='dash-main'>
             <h2>Analytics Overview</h2>
+            <p>Database ID : 29JFH98RHF</p>
             <br />
             <div className='analytics-stats'>
                 
