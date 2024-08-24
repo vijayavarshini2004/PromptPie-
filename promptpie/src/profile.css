@@ -1,0 +1,183 @@
+.profile-page {
+    width: 1728px;
+    height: 2112px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; 
+  }
+
+  .profile-background {
+    position: relative;
+    width: 1728px;
+    height: 300px;
+    background-image: url('./Images/BGhtml.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+  }
+  
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: -100px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-picture img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .profileName {
+    position: absolute;
+    bottom: 0; 
+    left: 33px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    transform: translateY(30px); 
+  }
+
+  .recentActivity {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #000000; 
+  }
+
+
+.databaseID {
+  margin-top:80px;
+  margin-left: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #54cad3; 
+}
+
+.rectangleContainer {
+  margin-top: 50px; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  align-items: center; 
+}
+
+.rectangle {
+  width: 1300px;
+  height: 51px;
+  padding-right: 20px;
+  background-color: #ffffff; 
+  border-radius: 20px;
+  border: 1px solid #151111; 
+  display: flex; 
+  align-items: center;
+  padding-left: 30px;
+  font-size: 18px; 
+  color: #333; 
+  position: relative;
+}
+
+.rectangleText {
+  margin-right: auto; 
+}
+
+.rectangleDate {
+  margin-left: 1000px; 
+  font-size: 16px;
+  color: #666; 
+}
+
+.rectangleTime {
+  margin-left: auto;
+  font-size: 16px; 
+  color: #666; 
+}
+
+.DownloadHistory {
+  margin-top:50px;
+  margin-left: 50px; 
+  font-size: 35px;
+  font-weight: bold;
+  color: #54cad3; 
+  margin-bottom:50px;
+}
+
+.rectangleContainer2 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  align-items: center; 
+}
+
+.rectangle2 {
+  width: 1300px;
+  height: 51px;
+  background-color: #ffffff; 
+  border-radius: 20px;
+  border: 1px solid #151111; 
+  display: flex; 
+  align-items: center; 
+  padding-left: 30px; 
+  font-size: 18px; 
+  color: #333; 
+  position: relative;
+  justify-content: space-between;
+  padding-right:30px;
+}
+
+.rectangleText {
+  margin-right: auto; 
+}
+
+.dow{
+  width: 20px; 
+  height: 20px;
+  transition: 0.25s ease-in-out;
+}
+
+
+.dow:hover{
+  transform:scale(1.2);
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+@keyframes spin{
+  0%{
+    transform:rotate(0deg);
+    transition: 0.25s ease-in-out;
+  }
+
+  25%{
+    transform:rotate(90deg);
+    transition: 0.25s ease-in-out;
+  }
+
+  50%{
+    transform:rotate(180deg);
+    transition: 0.25s ease-in-out;
+  }
+
+  75%{
+    transform:rotate(270deg);
+    transition: 0.25s ease-in-out;
+  }
+
+  100%{
+    transform:rotate(270deg);
+    transition: 0.25s ease-in-out;
+  }
+}
+
