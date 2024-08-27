@@ -1,5 +1,5 @@
 .background-image {
-  background-image: url('./Images/homebg1.jpg'); /* Path to your background image */
+  background-image: url('../Images/homebg1.jpg'); /* Path to your background image */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Scale the image to cover the container */
@@ -124,6 +124,9 @@
   border-radius: 15px;
   padding-left: 4px;
   padding-right: 4px;
+}
+.get-started:hover{
+   cursor: pointer;
 }
 .center{
   display: inline-block; /* Make h1 elements inline-block */

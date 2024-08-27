@@ -1,4 +1,6 @@
 import './dashboard.css'
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
 
 export default function Dashboard(){
     return (
@@ -51,7 +53,7 @@ export default function Dashboard(){
               <div className='dash-buttons'>
                 <div>Resources</div>
                 <div>Analyse</div>
-                <div>Chat</div>
+                <Link to="/chat" style={{ textDecoration: 'none' }}><div>Chat</div></Link>
               </div>
             </div>
             

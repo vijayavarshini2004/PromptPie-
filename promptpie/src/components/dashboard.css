@@ -6,6 +6,9 @@
     font-family:var(--t1)
 }
 
+Link{
+    text-decoration: none;
+}
 .dash-navbar{
     box-sizing: border-box;
     display: flex;

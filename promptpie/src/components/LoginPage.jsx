@@ -1,7 +1,7 @@
 import React from "react";
-import LoginImage from './Images/login2.png'
-import googleicon from './Images/googleicon.png'
-import robo from './Images/robota.png'
+import LoginImage from '../Images/login2.png'
+import googleicon from '../Images/googleicon.png'
+import robo from '../Images/robota.png'
 
 const Login2 = () => {
   return (

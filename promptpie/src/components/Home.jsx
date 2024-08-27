@@ -1,14 +1,16 @@
 // Home.jsx
 import React from 'react';
-import logo from './Images/logo.png';
+import logo from '../Images/logo.png';
 import './Home.css';
-import homebg2 from './Images/homebg2.jpg';
-import homeimg1 from './Images/home-img1.png';
-import homeimg2 from './Images/home-img2.png';
-import footicon1 from './Images/footer-icon1.png';
-import footicon2 from './Images/footer-icon2.png';
-import footicon3 from './Images/footer-icon3.png';
-import footicon4 from './Images/footer-icon4.png';
+import homebg2 from '../Images/homebg2.jpg';
+import homeimg1 from '../Images/home-img1.png';
+import homeimg2 from '../Images/home-img2.png';
+import footicon1 from '../Images/footer-icon1.png';
+import footicon2 from '../Images/footer-icon2.png';
+import footicon3 from '../Images/footer-icon3.png';
+import footicon4 from '../Images/footer-icon4.png';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
 
 
 const Home = () => {
@@ -25,8 +27,8 @@ const Home = () => {
           <li><a href="#about">About</a></li>
         </ul>
         <div className="auth-links">
-          <a href="#signup">Sign Up</a>
-          <a href="#signin">Sign In</a>
+        <Link to="/LoginPage">Sign Up</Link>
+        <Link to="/Dashboard">Sign In</Link>
         </div>
       </nav>
       <div className="content">
@@ -34,7 +36,7 @@ const Home = () => {
         <div className='center'id='pink'> Insights </div>
         <div>In minutes</div>
         <p>Explore your Data <br/> Build Your Dashboard</p>
-        <button>Get Started</button>
+        <Link to="/Dashboard"><button className='get-started'>Get Started</button></Link>
       </div>
     </div>
     <section className="image-section" style={{ backgroundImage: `url(${homebg2})`

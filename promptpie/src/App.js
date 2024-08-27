@@ -1,9 +1,10 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home';
+import Home from './components/Home';
 import Dashboard from './components/dashboard';
-import Chatbot from './chatbot';
+import Chatbot from './components/chatbot';
+import login from './login';
  
 function App() {
   return (
