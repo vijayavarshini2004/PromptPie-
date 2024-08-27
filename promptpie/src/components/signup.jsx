@@ -7,9 +7,9 @@ import signup from"../Images/login2.png"
 const Signup =()=>
   {
     return(
-        <div class="container">
-          <div class="content">
-            <div class="image-container">
+        <div class="signup-container">
+          <div class="signup-content">
+            <div class="sign-image-container">
               <img src={signup} class="sign-up-man"></img>
             </div>
      
@@ -48,7 +48,7 @@ const Signup =()=>
               </button>
             </div></div>
           </div>
-          <div class="footer">promptpie</div>
+       
         </div>
      
     )

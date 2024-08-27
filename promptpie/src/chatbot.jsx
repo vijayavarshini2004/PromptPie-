@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './chatbot.css';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie, Bar, Line } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, BarElement, LineElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
 
-// Register the necessary components for Pie chart
-ChartJS.register(ArcElement, Tooltip, Legend);
+// Register the necessary components for charts
+ChartJS.register(ArcElement, BarElement, LineElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function Chatbot() {
   const [messages, setMessages] = useState([
@@ -13,6 +13,7 @@ function Chatbot() {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [chartData, setChartData] = useState({ labels: [], datasets: [] }); // State for chart data
+  const [chartType, setChartType] = useState('pie'); // State for chart type
 
   const handleInputChange = (event) => {
     setInputMessage(event.target.value);
@@ -44,7 +45,9 @@ function Chatbot() {
   };
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return; // Do not send empty messages
+    if (!inputMessage.trim()) return; // Do not send empty messages 
+    const ack = document.getElementById('ack');
+    ack.style.display = 'none';
 
     // Append the user's message to the messages list
     setMessages(prevMessages => [...prevMessages, { text: inputMessage, sender: 'user' }]);
@@ -64,11 +67,11 @@ function Chatbot() {
 
       const data = await response.json();
 
-      console.log(data)
+      console.log(data);
 
       // Transform data for the chart
-      const labels = data.map(row => row.col1);
-      const values = data.map(row => row.col2);
+      const labels = data.slice(0, -1).map(row => row.col1);
+      const values = data.slice(0, -1).map(row => row.col2);
 
       // Generate unique colors for each segment
       const colors = labels.map(() => `hsl(${Math.random() * 360}, 70%, 70%)`);
@@ -129,7 +132,7 @@ function Chatbot() {
     }
   };
 
-  const options = {
+  const pieChartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -146,6 +149,55 @@ function Chatbot() {
     },
   };
 
+  const barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return context.label + ': ' + context.raw;
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  const lineChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return context.label + ': ' + context.raw;
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,  // Ensure y-axis starts at zero
+      },
+      x: {
+        beginAtZero: true,  // Optional: Ensure x-axis starts at zero (usually for category-based data)
+      },
+    },
+  };
+
+  const handleChartTypeChange = (event) => {
+    setChartType(event.target.value);
+  };
+
   const handleDownloadChart = () => {
     const chartElement = document.getElementById('chart-container');
     const url = chartElement.toDataURL('image/png');
@@ -153,6 +205,15 @@ function Chatbot() {
     link.href = url;
     link.download = 'chart.png';
     link.click();
+  };
+
+  const renderChart = () => {
+  
+    if (chartType === 'pie') {
+      return <Pie id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={pieChartOptions} plugins={[textInsidePiePlugin]} />;
+    } else if (chartType === 'bar') {
+      return <Bar id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={barChartOptions} />;
+    }
   };
 
   return (
@@ -200,12 +261,18 @@ function Chatbot() {
       </div>
 
       <div className='chart-view'>
-        <h2>Your Charts Appear Here</h2>
+        <h2 id='ack'>Your Charts Appear Here</h2>
+
+        <select onChange={handleChartTypeChange} value={chartType} className="chart-type-dropdown">
+          <option value="pie">Pie Chart</option>
+          <option value="bar">Bar Chart</option>
+        </select>
+
         <div className='chart-inner'>
-        <Pie id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={options} plugins={[textInsidePiePlugin]} />
+          {renderChart()}
+        </div>
 
         <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button></center>
-        </div>
       </div>
     </div>
   );
