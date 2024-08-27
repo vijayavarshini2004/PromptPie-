@@ -3,9 +3,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Dashboard from './components/dashboard';
-import Chatbot from './components/chatbot';
-import login from './login';
+import Chatbot from './chatbot';
+import Signup from './components/signup';
  
+
 function App() {
   return (
     <Router>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/chat" element={<Chatbot />} />
+        <Route path = "/signup" element = {<Signup/>} />
       </Routes>
     </Router>
   );
