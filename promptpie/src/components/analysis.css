@@ -1,0 +1,114 @@
+/* Container Styles */
+.analysis-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f7f8fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styles */
+  .analysis-header {
+    font-family: var(--t1);
+    background-color: #99d4d3;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  /* Input Section Styles */
+  .input-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--t1);
+    margin-top: 20px;
+  }
+  
+  .input-section label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .input-section input {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Content Section Styles */
+  .content-section {
+    margin-top: 20px;
+  }
+  
+  .content-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .content-left-image {
+    flex-direction: row;
+  }
+  
+  .content-right-image {
+    flex-direction: row-reverse;
+  }
+  
+  /* Image Block Styles */
+  .image-block {
+    height: 300px;
+    width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .image-block img {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+  }
+  
+  /* Text Block Styles */
+  .text-block {
+    font-family: var(--t1);
+    width: 60%;
+    padding: 20px;
+  }
+  
+  .text-block h2 {
+    margin-top: 0;
+  }
+  
+  .text-block p {
+    margin-bottom: 0;
+  }
+  
+  /* Download Section Styles */
+  .download-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .download-button {
+    background-color: #1e90ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #1c86ee;
+  }
+  

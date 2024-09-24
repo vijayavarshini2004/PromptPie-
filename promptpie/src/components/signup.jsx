@@ -3,6 +3,8 @@ import './signup.css';
 import logo from "../Images/logo.png"
 import googleicon from"../Images/googleicon.png"
 import signup from"../Images/login2.png"
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
 
 const Signup =()=>
   {
@@ -32,7 +34,7 @@ const Signup =()=>
                 <input type="password" id="password" class="input-field"></input>
               </div>
      
-              <button class="sign-up-btn">Sign Up</button>
+              <Link to="/Dashboard"><button class="sign-up-btn">Sign Up</button></Link>
      
               <div class="login-option">
                 <span>Already Have an Account?</span>

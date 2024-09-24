@@ -1,7 +1,7 @@
 import React from 'react'
 import './profile.css';
-import profileimg from './Images/Ellipse 1.png';
-import downloadIcon from './Images/Vector.png';
+import profileimg from '../Images/Ellipse1.png';
+import downloadIcon from '../Images/Vector.png';
 
 const Profile = () => {
     return (

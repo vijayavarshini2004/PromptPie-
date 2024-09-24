@@ -45,14 +45,14 @@ export default function Dashboard(){
                 <div><img src="https://th.bing.com/th/id/R.cf4230eab9e1103ab7e5d7d6f64572b5?rik=tZ03GGSAJ3dJOg&riu=http%3a%2f%2fcdn.embed.ly%2fproviders%2flogos%2fstrawpoll.png&ehk=TKvMgdp9vhotQbIKRgYSyP48sc1pvwtmanGp8MgdarI%3d&risl=&pid=ImgRaw&r=0" alt="" /></div>
                 <div><img src="https://www.weather2visit.com/images/charts/small/ihuo-ng-mar-pre.png" alt="" /></div>
                 <div><img src="https://user-images.githubusercontent.com/62892813/135819792-d0e9ec07-a48b-4758-b9d1-147e8a3a615f.png" alt="" /></div>
-                <div><img src="https://cdn1.byjus.com/wp-content/uploads/2019/08/scatter-plot.png" alt="" /></div>
+                <div><img src="https://www.health.state.mn.us/communities/practice/resources/phqitoolbox/images/scatter_ex_atlanticcities.jpg" alt="" /></div>
                 <div><img src="https://www.mdpi.com/sustainability/sustainability-13-11054/article_deploy/html/images/sustainability-13-11054-g003.png" alt="" /></div>
                 <div><img src="https://th.bing.com/th/id/OIP.7CU5ZHHFD-m_xBiye1q5JQHaFj?rs=1&pid=ImgDetMain" alt="" /></div>
               </div>  
 
               <div className='dash-buttons'>
-                <div>Resources</div>
-                <div>Analyse</div>
+                <Link to="/Profile" style={{ textDecoration: 'none' }}><div>Resources</div></Link>
+                <Link to="/Analysis" style={{ textDecoration: 'none' }}> <div>Analyse</div></Link>
                 <Link to="/chat" style={{ textDecoration: 'none' }}><div>Chat</div></Link>
               </div>
             </div>

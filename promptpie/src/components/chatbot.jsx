@@ -272,7 +272,7 @@ function Chatbot() {
           {renderChart()}
         </div>
 
-        <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button></center>
+        <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button> <button className="download-button">Add to Dashboard</button></center>
       </div>
     </div>
   );

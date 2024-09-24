@@ -27,8 +27,8 @@ const Home = () => {
           <li><a href="#about">About</a></li>
         </ul>
         <div className="auth-links">
-        <Link to="/LoginPage">Sign Up</Link>
-        <Link to="/Dashboard">Sign In</Link>
+        <Link to="/Signup">Sign Up</Link>
+        <Link to="/Signup">Sign In</Link>
         </div>
       </nav>
       <div className="content">
@@ -36,7 +36,7 @@ const Home = () => {
         <div className='center'id='pink'> Insights </div>
         <div>In minutes</div>
         <p>Explore your Data <br/> Build Your Dashboard</p>
-        <Link to="/Dashboard"><button className='get-started'>Get Started</button></Link>
+        <Link to="/Signup"><button className='get-started'>Get Started</button></Link>
       </div>
     </div>
     <section className="image-section" style={{ backgroundImage: `url(${homebg2})`
@@ -46,12 +46,11 @@ const Home = () => {
             <img src={homeimg2} alt="Left Img" />
           </div>
           <div className="text-box">
-            <h2>Text on the Right</h2>
-            <p>This is a description text that appears on the right side of the image.
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                 It has survived not only five centuries, but also the leap into electronic typesetting.</p>
+            <h2>About PromptPie: Revolutionizing Data Analysis</h2>
+            <p>PromptPie is an innovative AI-powered platform tailored for data analysts looking to streamline their data analysis tasks. 
+              By allowing users to upload datasets and pose specific questions in natural language, PromptPie transforms the way analysts interact with their data.
+               Users can easily generate detailed insights and visualizations, including graphs and charts, with just a few simple prompts.
+                This functionality not only enhances the efficiency of data analysis but also democratizes access to complex analytical processes, making them approachable for users of all skill levels.</p>
           </div>
         </div>
         <div className="section-content reverse">
@@ -59,12 +58,10 @@ const Home = () => {
             <img src={homeimg1} alt="Right Img" />
           </div>
           <div className="text-box">
-            <h2>Text on the Left</h2>
-            <p>This is a description text that appears on the left side of the image.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic typesetting
+            <h2>Discover PromptPie: Your AI-Powered Data Analytics Partner</h2>
+            <p>At PromptPie, our mission is to empower analysts to focus on what truly matters: deriving actionable insights from their data.
+               The platform's user-friendly interface, combined with robust AI capabilities, enables quick responses to inquiries and dynamic visual representations of data trends.
+                Whether you’re exploring business metrics or conducting academic research, PromptPie provides the tools necessary to uncover hidden patterns and make data-driven decisions with confidence. Join us in revolutionizing the data analysis experience, where clarity and accessibility meet innovation.
             </p>
           </div>
         </div>
