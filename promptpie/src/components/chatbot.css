@@ -229,7 +229,9 @@
   transform: translate(-50%,-50%);
   opacity: 0.6;
 }
-
+.download-button{
+  margin-right: 10px;
+}
 .download-button:hover{
   background-color: rgb(181, 0, 0);
   color: white;

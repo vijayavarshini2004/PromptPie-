@@ -95,6 +95,36 @@ function Chatbot() {
     }
   };
 
+
+  const handleAddToDashboard = async () => {
+    const chartElement = document.getElementById('chart-container'); // Get the chart canvas element
+    const imageData = chartElement.toDataURL('image/png'); // Convert chart to base64 image
+    const latestResponse = messages[messages.length - 1].text; // Get the latest chatbot response for description
+  
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/save-chart-to-dashboard/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          description: latestResponse,
+          image: imageData
+        }),
+      });
+  
+      const result = await response.json();
+      if (response.ok) {
+        alert('Chart added to dashboard successfully!');
+      } else {
+        alert('Failed to add chart to dashboard: ' + result.error);
+      }
+    } catch (error) {
+      alert('Error adding chart to dashboard: ' + error.message);
+    }
+  };
+  
+
   const displayTypingEffect = (message) => {
     let index = -2;
     const typingSpeed = 50; // Adjust typing speed here
@@ -272,7 +302,8 @@ function Chatbot() {
           {renderChart()}
         </div>
 
-        <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button> <button className="download-button">Add to Dashboard</button></center>
+        <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button>
+        <button onClick={handleAddToDashboard} className="download-button">Add to Dashboard</button></center>
       </div>
     </div>
   );
