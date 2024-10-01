@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './dashboard.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Sidebar from './sidebar';
 
 export default function Dashboard() {
     const [charts, setCharts] = useState([]);
+    const [sideOpen, setSideOpen] = useState(false);
 
     // Fetch saved charts from the backend
     useEffect(() => {
@@ -20,8 +22,34 @@ export default function Dashboard() {
         fetchCharts();
     }, []);
 
+    const handleSideBar = (event) => {
+        setSideOpen(!sideOpen)
+    }
+
     return (
+        
         <div className='dash-body'>
+            {sideOpen ? ( 
+            <div className="sidebar-container">
+            <button onClick={handleSideBar} >X</button>
+            <br />
+            <ul>
+                <li><Link className='sideItem' to={'/'}>Home</Link></li>
+                <hr />
+                <li><Link to={'/about'} className="sideItem">About us</Link></li>
+                <hr />
+                <li><Link to={'/contact'} className="sideItem">Contact us</Link></li>
+                <hr />
+                <li><Link to={'/faqs'} className="sideItem">FAQs</Link></li>
+                <hr />
+                <li>Language</li>
+                <hr />
+                <li><Link to={'/Signup'} className="sideItem">Logout</Link></li>
+            </ul>
+            </div>
+            ) : <div></div>}
+
+
             <div className="dash-navbar">
                 <div className='search'>
                     <input type="text" placeholder='Search' />
@@ -29,11 +57,12 @@ export default function Dashboard() {
                 </div>
                 <div className='right'>
                     <span className='profile'>P</span>
-                    <span className='settings'>
+                    <span className='settings' id='settings' onClick={handleSideBar}>
                         <img src='https://icons.veryicon.com/png/o/miscellaneous/acdm-monochromatic/fy_ic_setting.png' alt='settings'/>
                     </span>
                 </div>
             </div>
+
 
             <div className='dash-main'>
                 <h2>Analytics Overview</h2>

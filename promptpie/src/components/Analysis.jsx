@@ -51,7 +51,7 @@ const MyAnalysis = () => {
 
   const handleDownload = () => {
     const input = document.querySelector('.content-section');
-
+  
     // Ensure images are loaded before generating the PDF
     const images = input.querySelectorAll('img');
     const promises = Array.from(images).map((img) => {
@@ -64,7 +64,7 @@ const MyAnalysis = () => {
         }
       });
     });
-
+  
     // Wait for all images to load
     Promise.all(promises)
       .then(() => {
@@ -78,19 +78,39 @@ const MyAnalysis = () => {
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         let heightLeft = imgHeight;
         let position = 0;
-
+  
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
-
+  
         while (heightLeft > 0) {
           position = heightLeft - imgHeight;
           pdf.addPage();
           pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
         }
-
+  
         const filename = inputTitle.trim() !== '' ? `${inputTitle}.pdf` : 'analysis.pdf';
+        
+        // Save the PDF locally
         pdf.save(filename);
+  
+        // Send the generated PDF to Django backend for storage
+        const pdfBlob = pdf.output('blob');
+        const formData = new FormData();
+        formData.append('name', inputTitle.trim() || 'Untitled PDF');
+        formData.append('file', pdfBlob, filename);
+  
+        fetch('http://localhost:8000/api/upload/', {
+          method: 'POST',
+          body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('PDF successfully uploaded:', data);
+        })
+        .catch((error) => {
+          console.error('Error uploading PDF:', error);
+        });
       })
       .catch((error) => {
         console.error('Error generating PDF:', error);

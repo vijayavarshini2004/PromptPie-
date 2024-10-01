@@ -86,10 +86,10 @@
   
   
   .form-container .sign-up-btn {
-    background-color: #65f4f4;
+    background-color: #33b7b7;
     color: rgb(0, 0, 0);
     width: 11rem;
-    border-width: 1px;
+    border:none;
     height: 2.5rem;
     margin-left: 8rem;
     margin-top: 1.5rem;
@@ -98,6 +98,10 @@
     font-weight: 500;
     border-radius: 5rem;
     cursor: pointer;
+  }
+
+  .sign-up-btn:hover{
+    background-color: rgb(53, 143, 143);
   }
   
   .form-container .login-option {

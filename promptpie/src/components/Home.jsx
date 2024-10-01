@@ -46,7 +46,7 @@ const Home = () => {
             <img src={homeimg2} alt="Left Img" />
           </div>
           <div className="text-box">
-            <h2>About PromptPie: Revolutionizing Data Analysis</h2>
+            <h2>About PromptPie : Revolutionizing Data Analysis</h2>
             <p>PromptPie is an innovative AI-powered platform tailored for data analysts looking to streamline their data analysis tasks. 
               By allowing users to upload datasets and pose specific questions in natural language, PromptPie transforms the way analysts interact with their data.
                Users can easily generate detailed insights and visualizations, including graphs and charts, with just a few simple prompts.
@@ -58,7 +58,7 @@ const Home = () => {
             <img src={homeimg1} alt="Right Img" />
           </div>
           <div className="text-box">
-            <h2>Discover PromptPie: Your AI-Powered Data Analytics Partner</h2>
+            <h2>Discover PromptPie : Your AI-Powered Data Analytics Partner</h2>
             <p>At PromptPie, our mission is to empower analysts to focus on what truly matters: deriving actionable insights from their data.
                The platform's user-friendly interface, combined with robust AI capabilities, enables quick responses to inquiries and dynamic visual representations of data trends.
                 Whether you’re exploring business metrics or conducting academic research, PromptPie provides the tools necessary to uncover hidden patterns and make data-driven decisions with confidence. Join us in revolutionizing the data analysis experience, where clarity and accessibility meet innovation.
@@ -82,13 +82,13 @@ const Home = () => {
                 <a href="#"><img src={footicon3} alt="LinkedIn"/></a>
                 <a href="#"><img src={footicon4} alt="Email"/></a>
             </div>
-            <div className="links">
-                <a href="#">&gt; Home</a><br/>
-                <a href="#">&gt; Services</a><br/>
-                <a href="#">&gt; About</a><br/>
-                <a href="#">&gt; FAQs</a><br/>
-                <a href="#">&gt; Contact Us</a>
-            </div>
+            <ul className="links">
+                <a href="#"><li>&gt; Home</li></a><br/>
+                <a href="#"><li>&gt; Services</li></a><br/>
+                <a href="#"><li>&gt; About</li></a><br/>
+                <a href="#"><li>&gt; FAQs</li></a><br/>
+                <a href="#"><li>&gt; Contact Us</li></a>
+            </ul>
         </div>
         <div className="footer-bottom">
             <p>&copy; Prompt-pie - 2024</p>

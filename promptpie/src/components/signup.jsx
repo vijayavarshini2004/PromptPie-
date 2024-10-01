@@ -20,7 +20,7 @@ const Signup =()=>
            
      
               <div class="input-group">
-                <label for="first-name" class="input-label">First name</label>
+                <label for="first-name" class="input-label">Username</label>
                 <input type="text" id="first-name" class="input-field" autocomplete="given-name"></input>
               </div>
      
@@ -55,4 +55,4 @@ const Signup =()=>
      
     )
 }
-export default Signup
+export default Signup;

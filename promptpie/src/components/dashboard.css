@@ -1,3 +1,5 @@
+
+
 .dash-body{
     box-sizing: border-box;
     height:auto;
@@ -64,6 +66,13 @@ Link{
 .settings{
     height: 50px;
     width: 50px;
+    transition: 0.2s ease-in-out;
+}
+
+.settings:hover{
+    cursor: pointer;
+    transform: rotate(90deg);
+    transition: 0.2s ease-in-out;
 }
 
 .settings img{
@@ -148,6 +157,7 @@ Link{
 }
 
 .dash-buttons div{
+
     background-color: #5F6EFB;
     box-shadow: inset 3px 8px 8px rgb(48, 108, 237);
     width:auto;
@@ -166,3 +176,61 @@ Link{
     box-shadow: inset 1px 48px 48px rgb(71, 48, 225);
     transition: 0.35s ease-in-out;
 }
+
+.sidebar-container{
+    padding: 10px;
+    height: 100svh;
+    width :25%;
+    background-color: white;
+    position: absolute;
+    right:0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-container ul{
+    list-style: none;
+    text-align: center;
+}
+
+.sidebar-container button{
+    width: 60px;
+    margin-bottom: 100px;
+    background-color: #5F6EFB;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border:none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
+.sidebar-container ul li{
+    padding:10px;
+    transition: 0.2s ease-in-out;
+    border-radius: 15px;
+}
+
+.sidebar-container ul li:hover{
+    background-color: #5F6EFB;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+
+.sidebar-container hr{
+    width: 100%;
+}
+
+.sideItem{
+    text-decoration: none;
+    color:black;
+}
+
+.sideItem:hover{
+    color:white;
+}
+
+

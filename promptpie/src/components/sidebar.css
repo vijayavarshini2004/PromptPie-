@@ -1,0 +1,8 @@
+.sidebar-container{
+    height: 100svh;
+    width :25%;
+    background-color: white;
+    position: absolute;
+    right:0;
+}
+

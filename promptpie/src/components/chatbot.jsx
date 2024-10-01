@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './chatbot.css';
-import { Pie, Bar, Line } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, BarElement, LineElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
-
+import { Pie, Bar, Line, Radar, Doughnut, PolarArea, Bubble } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, BarElement, LineElement, RadialLinearScale, CategoryScale, LinearScale, Tooltip, Legend, PointElement } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 // Register the necessary components for charts
-ChartJS.register(ArcElement, BarElement, LineElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, RadialLinearScale,ChartDataLabels);
 
 function Chatbot() {
   const [messages, setMessages] = useState([
@@ -19,43 +19,16 @@ function Chatbot() {
     setInputMessage(event.target.value);
   };
 
-  const textInsidePiePlugin = {
-    id: 'textInsidePie',
-    afterDraw: (chart) => {
-      const { ctx, chartArea: { width, height } } = chart;
-      chart.data.datasets.forEach((dataset, i) => {
-        chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
-          const { x, y } = datapoint.tooltipPosition();
-          const label = chart.data.labels[index];
-          const value = dataset.data[index];
-          
-          // Draw label
-          ctx.font = '14px Arial';
-          ctx.fillStyle = 'white';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(`${label}`, x, y - 10);
-          
-          // Draw value
-          ctx.font = 'bold 14px Arial';
-          ctx.fillText(`${value}`, x, y + 10);
-        });
-      });
-    },
-  };
-
   const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return; // Do not send empty messages 
+    if (!inputMessage.trim()) return; // Do not send empty messages
     const ack = document.getElementById('ack');
     ack.style.display = 'none';
 
-    // Append the user's message to the messages list
     setMessages(prevMessages => [...prevMessages, { text: inputMessage, sender: 'user' }]);
     setInputMessage('');
     
     setIsTyping(true);
 
-    // Make the API call to the backend
     try {
       const response = await fetch('http://127.0.0.1:8000/api/chart-data/', {
         method: 'POST',
@@ -67,13 +40,9 @@ function Chatbot() {
 
       const data = await response.json();
 
-      console.log(data);
-
-      // Transform data for the chart
       const labels = data.slice(0, -1).map(row => row.col1);
       const values = data.slice(0, -1).map(row => row.col2);
 
-      // Generate unique colors for each segment
       const colors = labels.map(() => `hsl(${Math.random() * 360}, 70%, 70%)`);
 
       setChartData({
@@ -96,7 +65,7 @@ function Chatbot() {
   };
 
 
-  const handleAddToDashboard = async () => {
+    const handleAddToDashboard = async () => {
     const chartElement = document.getElementById('chart-container'); // Get the chart canvas element
     const imageData = chartElement.toDataURL('image/png'); // Convert chart to base64 image
     const latestResponse = messages[messages.length - 1].text; // Get the latest chatbot response for description
@@ -123,13 +92,12 @@ function Chatbot() {
       alert('Error adding chart to dashboard: ' + error.message);
     }
   };
-  
+
 
   const displayTypingEffect = (message) => {
     let index = -2;
-    const typingSpeed = 50; // Adjust typing speed here
+    const typingSpeed = 50;
   
-    // Add a new empty message for the AI response if not already typing
     if (!isTyping) {
       setMessages(prevMessages => [...prevMessages, { text: '', sender: 'ai' }]);
       setIsTyping(true);
@@ -140,11 +108,9 @@ function Chatbot() {
         const lastMessage = prevMessages[prevMessages.length - 1];
         
         if (index < message.length - 1) {
-          // Update the last AI message with the next character
           const updatedMessage = lastMessage.text + message[index + 1];
           return [...prevMessages.slice(0, -1), { text: updatedMessage, sender: 'ai' }];
         } else {
-          // Clear the typing effect once the full message is displayed
           clearInterval(interval);
           setIsTyping(false);
           return prevMessages;
@@ -157,12 +123,12 @@ function Chatbot() {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevents the default behavior of the Enter key
+      event.preventDefault();
       handleSendMessage();
     }
   };
 
-  const pieChartOptions = {
+  const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -175,51 +141,15 @@ function Chatbot() {
           },
         },
       },
-      textInsidePie: true, // Enable custom plugin
-    },
-  };
-
-  const barChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return context.label + ': ' + context.raw;
-          },
+      datalabels: {
+        display: chartType === 'pie' || chartType === 'doughnut' || chartType === 'polarArea', // Show labels only for pie chart
+        color: '#fff',
+        formatter: (value, context) => {
+          const label = context.chart.data.labels[context.dataIndex];
+          return `${label}: ${value}`;
         },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
-
-  const lineChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return context.label + ': ' + context.raw;
-          },
-        },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,  // Ensure y-axis starts at zero
-      },
-      x: {
-        beginAtZero: true,  // Optional: Ensure x-axis starts at zero (usually for category-based data)
+        anchor: 'center',
+        align: 'center',
       },
     },
   };
@@ -238,18 +168,27 @@ function Chatbot() {
   };
 
   const renderChart = () => {
-  
     if (chartType === 'pie') {
-      return <Pie id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={pieChartOptions} plugins={[textInsidePiePlugin]} />;
+      return <Pie id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
     } else if (chartType === 'bar') {
-      return <Bar id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={barChartOptions} />;
+      return <Bar id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
+    } else if (chartType === 'line') {
+      return <Line id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
+    } else if (chartType === 'radar') {
+      return <Radar id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
+    } else if (chartType === 'doughnut') {
+      return <Doughnut id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
+    } else if (chartType === 'polarArea') {
+      return <PolarArea id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
+    } else if (chartType === 'bubble') {
+      return <Bubble id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
     }
   };
 
   return (
     <div className="chat-container">
       <div className="chat-box">
-        {/* Profile Header Inside the Chat Box */}
+        {/* Profile Header */}
         <div className="chat-profile-header">
           <span className="chat-profile-pic">P</span>
           <span className="chat-username">Prasath JR</span>
@@ -274,7 +213,7 @@ function Chatbot() {
           ))}
         </div>
 
-        {/* Chat Input Area */}
+        {/* Chat Input */}
         <div className="chat">
           <input
             type="text"
@@ -296,14 +235,21 @@ function Chatbot() {
         <select onChange={handleChartTypeChange} value={chartType} className="chart-type-dropdown">
           <option value="pie">Pie Chart</option>
           <option value="bar">Bar Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="radar">Radar Chart</option>
+          <option value="doughnut">Doughnut Chart</option>
+          <option value="polarArea">Polar Area Chart</option>
+          <option value="bubble">Bubble Chart</option>
         </select>
 
         <div className='chart-inner'>
           {renderChart()}
         </div>
 
-        <center><button onClick={handleDownloadChart} className="download-button">Download Chart</button>
-        <button onClick={handleAddToDashboard} className="download-button">Add to Dashboard</button></center>
+        <center>
+          <button onClick={handleDownloadChart} className="download-button">Download Chart</button>
+          <button onClick={handleAddToDashboard} className="download-button">Add to Dashboard</button>
+        </center>
       </div>
     </div>
   );
