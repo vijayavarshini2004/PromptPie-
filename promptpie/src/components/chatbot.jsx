@@ -3,6 +3,7 @@ import './chatbot.css';
 import { Pie, Bar, Line, Radar, Doughnut, PolarArea, Bubble } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, BarElement, LineElement, RadialLinearScale, CategoryScale, LinearScale, Tooltip, Legend, PointElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Navigate } from 'react-router-dom';
 // Register the necessary components for charts
 ChartJS.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, RadialLinearScale,ChartDataLabels);
 
@@ -14,6 +15,8 @@ function Chatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const [chartData, setChartData] = useState({ labels: [], datasets: [] }); // State for chart data
   const [chartType, setChartType] = useState('pie'); // State for chart type
+  const [tableData, setTableData] = useState([]);
+  const [table, setTable] = useState(false);
 
   const handleInputChange = (event) => {
     setInputMessage(event.target.value);
@@ -58,6 +61,8 @@ function Chatbot() {
         ],
       });
 
+      setTableData(data.slice(0, -1));
+
       displayTypingEffect(data[data.length - 1].insights);
     } catch (error) {
       displayTypingEffect('Error fetching response from backend.');
@@ -65,7 +70,7 @@ function Chatbot() {
   };
 
 
-    const handleAddToDashboard = async () => {
+  const handleAddToDashboard = async () => {
     const chartElement = document.getElementById('chart-container'); // Get the chart canvas element
     const imageData = chartElement.toDataURL('image/png'); // Convert chart to base64 image
     const latestResponse = messages[messages.length - 1].text; // Get the latest chatbot response for description
@@ -75,6 +80,7 @@ function Chatbot() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}` // Add authorization token
         },
         body: JSON.stringify({
           description: latestResponse,
@@ -167,6 +173,37 @@ function Chatbot() {
     link.click();
   };
 
+  const renderTable = () => {
+    if (tableData.length === 0) {
+      return <p>No data available to display.</p>;
+    }
+
+    // Extract column headers from the first object in tableData
+    const headers = Object.keys(tableData[0]);
+
+
+    return (
+      <table border="1">
+        <thead>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {headers.map((header, colIndex) => (
+                <td key={colIndex}>{row[header]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
   const renderChart = () => {
     if (chartType === 'pie') {
       return <Pie id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
@@ -184,6 +221,18 @@ function Chatbot() {
       return <Bubble id='chart-container' style={{ width: '600px', height: '400px' }} data={chartData} options={chartOptions} />;
     }
   };
+
+  const showTable = (event) =>{
+    setTable(!table);
+  }
+
+  const token = localStorage.getItem('access_token');
+
+  if (!token) {
+      return <Navigate to="/login" />; // Redirect to login if not authenticated
+  }
+
+  
 
   return (
     <div className="chat-container">
@@ -249,8 +298,16 @@ function Chatbot() {
         <center>
           <button onClick={handleDownloadChart} className="download-button">Download Chart</button>
           <button onClick={handleAddToDashboard} className="download-button">Add to Dashboard</button>
+          <button onClick={showTable} className="download-button">Show Table</button>
         </center>
       </div>
+
+      {table ? (
+      <div className="table-section">
+        <h2>Data Table</h2>
+        {renderTable()}
+      </div>
+      ) :null}
     </div>
   );
 }

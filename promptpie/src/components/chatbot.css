@@ -236,3 +236,15 @@
   background-color: rgb(181, 0, 0);
   color: white;
 }
+
+.table-section{
+  position:absolute;
+  background-color: white;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  color:black;
+  padding: 20px;
+  z-index: 50;
+  border-radius: 15px;
+}

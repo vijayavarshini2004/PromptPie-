@@ -2,14 +2,26 @@ import { useEffect, useState } from 'react';
 import './dashboard.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Sidebar from './sidebar';
+import { Navigate } from 'react-router-dom';
 
 export default function Dashboard() {
     const [charts, setCharts] = useState([]);
     const [sideOpen, setSideOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false); // New state for logging out
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token'); // Clear the token from localStorage
+        setIsAuthenticated(false); // Update the authentication state
+        setIsLoggingOut(true); // Update state to indicate logging out
+      };
+
+
 
     // Fetch saved charts from the backend
     useEffect(() => {
         const fetchCharts = async () => {
+
             try {
                 const response = await fetch('http://127.0.0.1:8000/api/get-charts/');
                 const data = await response.json();
@@ -22,8 +34,18 @@ export default function Dashboard() {
         fetchCharts();
     }, []);
 
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+        return <Navigate to="/login" />; // Redirect to login if not authenticated
+    }
+
     const handleSideBar = (event) => {
         setSideOpen(!sideOpen)
+    }
+
+    if (isLoggingOut) {
+        return <Navigate to="/login" />; // Redirect to login when logging out
     }
 
     return (
@@ -44,7 +66,7 @@ export default function Dashboard() {
                 <hr />
                 <li>Language</li>
                 <hr />
-                <li><Link to={'/Signup'} className="sideItem">Logout</Link></li>
+                <li onClick={handleLogout}><Link to={'/Signup'} className="sideItem">Logout</Link></li>
             </ul>
             </div>
             ) : <div></div>}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './analysis.css';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Navigate } from 'react-router-dom';
 
 const MyAnalysis = () => {
   const [inputTitle, setInputTitle] = useState('');
@@ -120,6 +121,12 @@ const MyAnalysis = () => {
   // Display error message if there's an error
   if (error) {
     return <div className="error">{error}</div>;
+  }
+
+  const token = localStorage.getItem('access_token');
+
+  if (!token) {
+      return <Navigate to="/login" />; // Redirect to login if not authenticated
   }
 
   return (

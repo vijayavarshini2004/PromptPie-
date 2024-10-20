@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './profile.css';
 import profileimg from '../Images/Ellipse1.png';
 import downloadIcon from '../Images/Vector.png';
+import { Navigate } from 'react-router-dom';
 
 const Profile = () => {
     const [pdf_files, setPDFfiles] = useState([]);
@@ -27,6 +28,12 @@ const Profile = () => {
         link.download = fileName;
         link.click();
     };
+
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+        return <Navigate to="/login" />; // Redirect to login if not authenticated
+    }
 
     return (
         <div className='Profilepage'>
