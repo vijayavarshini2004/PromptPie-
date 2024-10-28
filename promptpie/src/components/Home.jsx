@@ -12,7 +12,6 @@ import footicon4 from '../Images/footer-icon4.png';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 
-
 const Home = () => {
   return (
     <div>
@@ -23,12 +22,12 @@ const Home = () => {
         </div>
         <ul className="nav-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
+          <li><Link to="/plans">Plans</Link></li>
         </ul>
         <div className="auth-links">
         <Link to="/Signup">Sign Up</Link>
-        <Link to="/Signup">Sign In</Link>
+        <Link to="/login">Sign In</Link>
         </div>
       </nav>
       <div className="content">
@@ -39,7 +38,7 @@ const Home = () => {
         <Link to="/Signup"><button className='get-started'>Get Started</button></Link>
       </div>
     </div>
-    <section className="image-section" style={{ backgroundImage: `url(${homebg2})`
+    <section id='about' className="image-section" style={{ backgroundImage: `url(${homebg2})`
 }}>
         <div className="section-content">
           <div className="image-container">
@@ -77,17 +76,17 @@ const Home = () => {
                 Country - 641 004.</p>
             </div>
             <div className="social-icons">
-                <a href="#"><img src={footicon1} alt="Instagram"/></a>
-                <a href="#"><img src={footicon2} alt="Threads"/></a>
-                <a href="#"><img src={footicon3} alt="LinkedIn"/></a>
-                <a href="#"><img src={footicon4} alt="Email"/></a>
+                <a href="https://www.instagam.com"><img src={footicon1} alt="Instagram"/></a>
+                <a href="https://www.threads.net"><img src={footicon2} alt="Threads"/></a>
+                <a href="https://www.linkedin.com"><img src={footicon3} alt="LinkedIn"/></a>
+                <a href="mailto:pponmanoj@gmail.com"><img src={footicon4} alt="Email"/></a>
             </div>
             <ul className="links">
-                <a href="#"><li>&gt; Home</li></a><br/>
-                <a href="#"><li>&gt; Services</li></a><br/>
-                <a href="#"><li>&gt; About</li></a><br/>
-                <a href="#"><li>&gt; FAQs</li></a><br/>
-                <a href="#"><li>&gt; Contact Us</li></a>
+                <Link to='/'><li>&gt; Home</li></Link><br/>
+                <Link to="/plans"><li>&gt; Plans</li></Link><br/>
+                <a href="#about"><li>&gt; About</li></a><br/>
+                <Link to="/faq"><li>&gt; FAQs</li></Link><br/>
+                <Link to="/contact"><li>&gt; Contact Us</li></Link>
             </ul>
         </div>
         <div className="footer-bottom">

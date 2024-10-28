@@ -105,13 +105,6 @@ const Signup = () => {
           </div>
 
           <div className="separator"></div>
-
-          <div className="g-b">
-            <button className="google-signin-btn">
-              <img src={googleicon} className="google-logo" alt="Google sign in" />
-              Sign in with Google
-            </button>
-          </div>
         </div>
       </div>
     </div>

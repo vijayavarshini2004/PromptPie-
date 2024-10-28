@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './chatbot.css';
 import { Pie, Bar, Line, Radar, Doughnut, PolarArea, Bubble } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, BarElement, LineElement, RadialLinearScale, CategoryScale, LinearScale, Tooltip, Legend, PointElement } from 'chart.js';
@@ -8,6 +8,30 @@ import { Navigate } from 'react-router-dom';
 ChartJS.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend, RadialLinearScale,ChartDataLabels);
 
 function Chatbot() {
+
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+      const fetchUsername = async () => {
+          try {
+              const response = await fetch('http://127.0.0.1:8000/api/get-username/', {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                  }
+              });
+              const data = await response.json();
+              setUsername(data.username);
+          } catch (error) {
+              console.error("Error fetching username:", error);
+          }
+      };
+  
+      fetchUsername();
+      console.log(username)
+  }, []);
+
   const [messages, setMessages] = useState([
     { text: 'Hi there, how can I help you?', sender: 'ai' }
   ]);
@@ -87,6 +111,8 @@ function Chatbot() {
           image: imageData
         }),
       });
+
+      console.log(localStorage.getItem('access_token'))
   
       const result = await response.json();
       if (response.ok) {
@@ -239,8 +265,8 @@ function Chatbot() {
       <div className="chat-box">
         {/* Profile Header */}
         <div className="chat-profile-header">
-          <span className="chat-profile-pic">P</span>
-          <span className="chat-username">Prasath JR</span>
+          <span className="chat-profile-pic">{username[0]}</span>
+          <span className="chat-username">{username}</span>
         </div>
 
         {/* Chat Messages */}
@@ -304,7 +330,6 @@ function Chatbot() {
 
       {table ? (
       <div className="table-section">
-        <h2>Data Table</h2>
         {renderTable()}
       </div>
       ) :null}

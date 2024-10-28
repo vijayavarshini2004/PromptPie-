@@ -8,6 +8,10 @@ import Profile from './components/Profile';
 import Analysis from './components/Analysis';
 import Login from './components/login';
 import PrivateRoute from './PrivateRoute';
+import Plans from './components/plans';
+import FAQAccordion from './components/accordion';
+import SocialIcons from './components/contact';
+import '@fortawesome/fontawesome-free/css/all.min.css';
  
 function App() {
   return (
@@ -19,7 +23,11 @@ function App() {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/chat" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
         <Route path = "/signup" element = {<Signup/>} />
+        <Route path = "/plans" element = {<Plans/>} />
+        <Route path = "/faq" element = {<FAQAccordion/>} />
+        <Route path = "/contact" element = {<SocialIcons/>} />
         <Route path="/analysis" element={<PrivateRoute><Analysis /></PrivateRoute>} />
+        
       </Routes>
     </Router>
   );

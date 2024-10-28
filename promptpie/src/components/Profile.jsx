@@ -6,6 +6,28 @@ import { Navigate } from 'react-router-dom';
 
 const Profile = () => {
     const [pdf_files, setPDFfiles] = useState([]);
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const fetchUsername = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/get-username/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    }
+                });
+                const data = await response.json();
+                setUsername(data.username);
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        };
+    
+        fetchUsername();
+        console.log(username)
+    }, []);
 
     // Fetch files from the backend
     useEffect(() => {
@@ -39,8 +61,8 @@ const Profile = () => {
         <div className='Profilepage'>
             <div className='profile-background'>
                 <div className="profile-picture">
-                    <img src={profileimg} alt="Profile" />
-                    <div className="profileName">Anonymous</div>
+                    <img src='https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png' alt="Profile" />
+                    <div className="profileName">{username}</div>
                 </div>
             </div>
 

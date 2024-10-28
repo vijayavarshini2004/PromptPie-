@@ -16,6 +16,29 @@ export default function Dashboard() {
         setIsLoggingOut(true); // Update state to indicate logging out
       };
 
+      const [username, setUsername] = useState('');
+
+      useEffect(() => {
+          const fetchUsername = async () => {
+              try {
+                  const response = await fetch('http://127.0.0.1:8000/api/get-username/', {
+                      method: 'GET',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                      }
+                  });
+                  const data = await response.json();
+                  setUsername(data.username);
+              } catch (error) {
+                  console.error("Error fetching username:", error);
+              }
+          };
+      
+          fetchUsername();
+          console.log(username)
+      }, []);
+
 
 
     // Fetch saved charts from the backend
@@ -58,13 +81,13 @@ export default function Dashboard() {
             <ul>
                 <li><Link className='sideItem' to={'/'}>Home</Link></li>
                 <hr />
-                <li><Link to={'/about'} className="sideItem">About us</Link></li>
+                <li><Link to={'/#about'} className="sideItem">About us</Link></li>
                 <hr />
                 <li><Link to={'/contact'} className="sideItem">Contact us</Link></li>
                 <hr />
-                <li><Link to={'/faqs'} className="sideItem">FAQs</Link></li>
+                <li><Link to={'/faq'} className="sideItem">FAQs</Link></li>
                 <hr />
-                <li>Language</li>
+                <li><Link to={'/plans'} className="sideItem">Subscribe</Link></li>
                 <hr />
                 <li onClick={handleLogout}><Link to={'/Signup'} className="sideItem">Logout</Link></li>
             </ul>
@@ -78,7 +101,7 @@ export default function Dashboard() {
                     <img className='search-img' src='https://www.thinkafrica.fi/wp-content/uploads/2019/04/search-icon.png' alt='search'/>
                 </div>
                 <div className='right'>
-                    <span className='profile'>P</span>
+                    <span className='profile'>{username[0]}</span>
                     <span className='settings' id='settings' onClick={handleSideBar}>
                         <img src='https://icons.veryicon.com/png/o/miscellaneous/acdm-monochromatic/fy_ic_setting.png' alt='settings'/>
                     </span>
@@ -87,6 +110,7 @@ export default function Dashboard() {
 
 
             <div className='dash-main'>
+                <h2>Welcome {username} !</h2>
                 <h2>Analytics Overview</h2>
                 <p>Database ID : 29JFH98RHF</p>
                 <br />
